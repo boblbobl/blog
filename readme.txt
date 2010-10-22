@@ -1,0 +1,3 @@
+#domain,public_key,private_key
+propellerheadblog.appspot.com,6LdOAb4SAAAAAEkajiU_r5ksvtPasK7EUAXKKtnD,6LdOAb4SAAAAALH1zbcxUkjwFYJQItNFHDd5zj_h
+propellerhead.com,6LdPAb4SAAAAAHt7qdbqw7VrqhJLEyPq9wAiDQyo,6LdPAb4SAAAAAATpVjfY3MKgdclLTWb0422WQCr0

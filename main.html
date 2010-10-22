@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>PropellerHead Blog</title>
+  <link href="/static/css/general.css" rel="stylesheet" type="text/css" media="screen" />
+  <script src="/static/js/default.js" type="text/javascript"></script>
+  <!--[if lt IE 7]>
+      <script src="/static/js/png-fix.js" type="text/javascript"></script>
+  <![endif]-->
+  <link rel="shortcut icon" href="/static/images/favicon.ico" />
+  <link rel="alternate" type="application/rss+xml" title="PropellerHead Blog" href="/rss.xml" />
+</head>
+<body>
+  <div id="mother" class="front">
+    <a href="/"><img src="/static/images/logo3.png" alt="logo" id="logo" /></a>
+    <div id="main">                
+      <div id="content">
+        <div id="topborder"></div>
+        <div id="blogposts">
+          {% for post in blog.posts %}
+          <h1>{{ post.published|date:"l, F j, Y" }}</h1>
+          <h2><a href="{{ post.link }}" rel="bookmark">{{ post.title }}</a></h2>
+          <div class="blogdetails">
+            posted by {{ post.author }} # {{ post.published|date:"f a" }}
+          </div>
+          <div class="blogcontent">
+            <div style="clear:both;"></div>
+            {{ post.content }}
+            {% if not blog.singlepost %}
+            <p class="blogcommands">
+              <a href="{{ post.link }}#comments" class="command">leave comment</a>
+            </p>
+            {% else %}
+            <a name="comments"></a>
+            <!-- Start Blog Comments -->
+            
+            <div id="blogcomments">
+
+                        <div class="blogcomment">
+                            <div class="blogcomment-meta">
+                                <p><img src="http://www.gravatar.com/avatar/972aa4757157dd5495b30fb681eeebfe?s=50&d=identicon" alt="Gravatar of propellerhead" /></p>
+                                <p>propellerhead</p>
+                            </div>
+                            <div class="blogcomment-top">&nbsp;</div>
+
+                            <div class="blogcomment-content">
+                                By the way, the sublimetext.exe reference is, in my opinion, one of the best text editors for Windows out there.
+                            </div>
+
+                            <div class="blogcomment-bottom">&nbsp;</div>
+                        </div>
+
+            </div>
+            
+            <!-- End Blog Comments -->
+            <h2>Leave a comment</h2>
+            <form id="blogwritecomment" action="{{ post.link }}#comment" method="post">
+              <p>
+                <input type="text" id="name" name="name" class="singleline" onblur="validateInput(this)" /> Your name
+              </p>
+              <p>
+                <input type="text" id="email" name="email" class="singleline" onblur="validateInputEmail(this)" /> Your e-mail (will not be displayed)†
+              </p>
+              <p>
+                <textarea rows="2" cols="20" id="comment" name="comment" class="multiline" onblur="validateInput(this)"></textarea>
+              </p>
+              <p>
+                {{ captchahtml }}
+              </p>
+              <p>
+                <input type="submit" id="submit" value="Submit" onclick="return validate();" />
+              </p>
+              <p class="disclaimer">
+                †Your e-mail will never be displayed and only used on the site to display your <a href="http://en.gravatar.com/">gravatar</a> (if you got one), and as a means to potentially get back to you, if I have any feedback or questions regarding your comment.
+              </p>
+            </form>
+            {% endif %}
+            <div style="clear:both; padding-bottom:0.25em"></div>
+          </div>
+          {% endfor %}
+          <p class="blogcommands">
+            {% if blog.singlepost %}
+            <a href="/" class="command">all posts</a>
+            {% else %}
+            {% ifnotequal blog.prev_link None %}
+            <a href="{{ blog.prev_link }}" class="command">newer posts</a>
+            {% endifnotequal %}
+            {% endif %}
+            {% ifnotequal blog.next_link None %}
+            <a href="{{ blog.next_link }}" class="command">older posts</a>
+            {% endifnotequal %}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="menu">
+        <h1>about</h1>
+        <p>
+          <img id="messengerlogo" src="/static/images/messenger_logo.jpg" align="right" alt="Picture of Lars Hundebøl" />
+          My name is Lars Hundebøl and I work for <a href="http://www.ebayclassifiedsgroup.com">eBay Classifieds</a>. 
+          By day I implement web sites and content management systems using technologies such as ASP.NET, and by night I 
+          tinker around developing web apps with Python and Ruby frameworks.<br /><br />
+          <a href="/rss.xml"><img id="rsslogo" src="/static/images/rss.gif" alt="RSS feed" /></a>
+        </p>
+        
+        <h1>tweets</h1>
+        {% for tweet in tweets %}
+        <h4>{{ tweet.published|date:"F j, Y # f a" }}</h4>
+        <p>{{ tweet.content }}</p>
+        {% endfor %}
+        <p>Follow me on twitter <a href="http://twitter.com/propellerhead">@propellerhead</a>.</p>
+        
+        <h1>badges</h1>
+        <p id="appengine">
+          <img src="http://code.google.com/appengine/images/appengine-silver-120x30.gif" alt="Powered by Google App Engine" />
+        </p>
+        <p id="twitter">
+          <img src="/static/images/twitter.png" width="88" border="0" alt="Twitter" />
+        </p>
+        <p id="bloggerBug">
+          <a href="http://www.blogger.com">
+            <img width="88" height="31" src="http://buttons.blogger.com/bloggerbutton1.gif" border="0" alt="This page is powered by Blogger. Isn't yours?" />
+          </a>
+        </p>
+        <p id="MSCT">
+          <img width="80" src="/static/images/MCTS.png" border="0" alt="Microsoft Certified Techonoly Specialist" />
+        </p>
+        
+        <p>
+          Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.
+        </p>
+        <p>
+          <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
+          </a>
+        </p>
+        <p>
+          &copy; Copyright 2010 Lars Hundebøl
+        </p>
+    </div>
+  </div>
+</body>
+</html>

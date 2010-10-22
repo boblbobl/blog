@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>')
+<rss version="2.0">
+  <channel>
+    <title>PropellerHead Blog</title>
+    <link>http://propellerhead.dk</link>
+    <description>This RSS feed returns the most recent blog posts from propellerhead.dk.</description>
+    <ttl>60</ttl>
+  </channel>
+  {% for post in blog.posts %}
+  <item>
+    <title>{{ post.title }}</title>
+    <link>{{ post.link }}</link>
+    <description>{{ post.content|escape }}</description>
+    <author>{{ post.author }}</author>
+    <pubDate>{{ post.published|date:"r" }}</pubDate>
+  </item>
+  {% endfor %}
+</rss>
