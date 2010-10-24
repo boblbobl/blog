@@ -6,38 +6,48 @@ from google.appengine.ext.webapp import util
 
 from recaptcha.client import captcha
 
-import helpers
+#import helpers
+from helpers import *
 
 class MainHandler(webapp.RequestHandler):
   def post(self):
+    path = self.request.path.split('/')
+    remoteip = self.request.remote_addr
+    url = self.request.url
     
+    name = self.request.get('name')
+    email = self.request.get('email')
+    comment = self.request.get('comment')
     challenge = self.request.get('recaptcha_challenge_field')
     response  = self.request.get('recaptcha_response_field')
-    remoteip = self.request.remote_addr
+    post_id = long(path[2])
     
     cResponse = captcha.submit(challenge, response, '6LdOAb4SAAAAALH1zbcxUkjwFYJQItNFHDd5zj_h', remoteip)
-    
-    
-    
+
     if cResponse.is_valid:
-      # response was valid
-      # other stuff goes here
-      self.response.out.write('It worked!' + challenge + ' ' + response);
+      comment = BlogComment(
+        post_id = post_id,
+        name = name,
+        email = email,
+        comment = comment)
+      comment.put()
+      
+      self.redirect(url)
     else:
-      error = cResponse.error_code
+      error = 'The values were not valid.'
       self.response.out.write('It failed with error code: ' + error);
   
   def get(self):
     twitter_id = '7942102'
   
-    twitter = helpers.Twitter(twitter_id)
+    twitter = Twitter(twitter_id)
     tweets = twitter.get_feeds()
     
     path = self.request.path.split('/')
     action = path[1].lower()
     
     blog_id = '31652320'
-    blogger = helpers.Blogger(blog_id)
+    blogger = Blogger(blog_id)
     
     page_items = 10
     single_post = False

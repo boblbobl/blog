@@ -87,6 +87,14 @@ blockquote, q {
 	height: 100%;
 }
 
+#github
+{
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  border: 0;
+}
+
 #logo
 {
 	position: absolute;
@@ -268,7 +276,7 @@ a.command:hover {
 
 #blogcomments
 {
-    padding-top: 20px;
+    padding-top: 0px; /* changed from 20px */
     margin-left: 80px;
 }
 
@@ -291,7 +299,7 @@ a.command:hover {
 .blogcomment-bottom,
 .blogcomment-top 
 {
-    background-image: url("/images/comment.png");
+    background-image: url("../images/comment.png");
     background-repeat: no-repeat;
     margin-left: -12px;
     width: 333px;

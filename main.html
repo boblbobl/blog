@@ -10,9 +10,23 @@
   <![endif]-->
   <link rel="shortcut icon" href="/static/images/favicon.ico" />
   <link rel="alternate" type="application/rss+xml" title="PropellerHead Blog" href="/rss.xml" />
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8481523-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
 </head>
 <body>
   <div id="mother" class="front">
+    <a href="http://github.com/propellerhead"><img src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" id="github" /></a>
     <a href="/"><img src="/static/images/logo3.png" alt="logo" id="logo" /></a>
     <div id="main">                
       <div id="content">
@@ -27,35 +41,29 @@
           <div class="blogcontent">
             <div style="clear:both;"></div>
             {{ post.content }}
+            <div id="blogcomments">
+              {% for comment in post.comments %}
+              <div class="blogcomment">
+                <div class="blogcomment-meta">
+                  <p><img src="{{ comment.gravatar_link }}" alt="Gravatar of {{ comment.name }}" /></p>
+                  <p>{{ comment.name }}</p>
+                </div>
+                <div class="blogcomment-top">&nbsp;</div>
+                  <div class="blogcomment-content">
+                    {{ comment.comment }}
+                  </div>
+                  <div class="blogcomment-bottom">&nbsp;</div>
+              </div>
+              {% endfor %}
+            </div>
             {% if not blog.singlepost %}
             <p class="blogcommands">
               <a href="{{ post.link }}#comments" class="command">leave comment</a>
             </p>
             {% else %}
             <a name="comments"></a>
-            <!-- Start Blog Comments -->
-            
-            <div id="blogcomments">
-
-                        <div class="blogcomment">
-                            <div class="blogcomment-meta">
-                                <p><img src="http://www.gravatar.com/avatar/972aa4757157dd5495b30fb681eeebfe?s=50&d=identicon" alt="Gravatar of propellerhead" /></p>
-                                <p>propellerhead</p>
-                            </div>
-                            <div class="blogcomment-top">&nbsp;</div>
-
-                            <div class="blogcomment-content">
-                                By the way, the sublimetext.exe reference is, in my opinion, one of the best text editors for Windows out there.
-                            </div>
-
-                            <div class="blogcomment-bottom">&nbsp;</div>
-                        </div>
-
-            </div>
-            
-            <!-- End Blog Comments -->
             <h2>Leave a comment</h2>
-            <form id="blogwritecomment" action="{{ post.link }}#comment" method="post">
+            <form id="blogwritecomment" action="{{ post.link }}" method="post">
               <p>
                 <input type="text" id="name" name="name" class="singleline" onblur="validateInput(this)" /> Your name
               </p>
