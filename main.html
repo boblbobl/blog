@@ -58,31 +58,8 @@
             </div>
             {% if not blog.singlepost %}
             <p class="blogcommands">
-              <a href="{{ post.link }}#comments" class="command">leave comment</a>
+              <a href="{{ post.link }}#comments" class="command">permalink</a>
             </p>
-            {% else %}
-            <a name="comments"></a>
-            <h2>Leave a comment</h2>
-            <form id="blogwritecomment" action="{{ post.link }}" method="post">
-              <p>
-                <input type="text" id="name" name="name" class="singleline" onblur="validateInput(this)" /> Your name
-              </p>
-              <p>
-                <input type="text" id="email" name="email" class="singleline" onblur="validateInputEmail(this)" /> Your e-mail (will not be displayed)†
-              </p>
-              <p>
-                <textarea rows="2" cols="20" id="comment" name="comment" class="multiline" onblur="validateInput(this)"></textarea>
-              </p>
-              <p>
-                {{ captchahtml }}
-              </p>
-              <p>
-                <input type="submit" id="submit" value="Submit" onclick="return validate();" />
-              </p>
-              <p class="disclaimer">
-                †Your e-mail will never be displayed and only used on the site to display your <a href="http://en.gravatar.com/">gravatar</a> (if you got one), and as a means to potentially get back to you, if I have any feedback or questions regarding your comment.
-              </p>
-            </form>
             {% endif %}
             <div style="clear:both; padding-bottom:0.25em"></div>
           </div>
@@ -108,23 +85,15 @@
           <img id="messengerlogo" src="/static/images/messenger_logo.jpg" align="right" alt="Picture of Lars Hundebøl" />
           My name is Lars Hundebøl and I work for <a href="http://www.ebayclassifiedsgroup.com">eBay Classifieds</a>. 
           By day I implement web sites and content management systems using technologies such as ASP.NET, and by night I 
-          tinker around developing web apps with Python and Ruby frameworks.<br /><br />
-          <a href="/rss.xml"><img id="rsslogo" src="/static/images/rss.gif" alt="RSS feed" /></a>
+          tinker around developing web apps with Python and Ruby frameworks.
         </p>
-        
-        <h1>tweets</h1>
-        {% for tweet in tweets %}
-        <h4>{{ tweet.published|date:"F j, Y # f a" }}</h4>
-        <p>{{ tweet.content }}</p>
-        {% endfor %}
         <p>Follow me on twitter <a href="http://twitter.com/propellerhead">@propellerhead</a>.</p>
+        
+        <p><a href="/rss.xml"><img id="rsslogo" src="/static/images/rss.gif" alt="RSS feed" /></a></p>
         
         <h1>badges</h1>
         <p id="appengine">
           <img src="http://code.google.com/appengine/images/appengine-silver-120x30.gif" alt="Powered by Google App Engine" />
-        </p>
-        <p id="twitter">
-          <img src="/static/images/twitter.png" width="88" border="0" alt="Twitter" />
         </p>
         <p id="bloggerBug">
           <a href="http://www.blogger.com">
@@ -134,7 +103,6 @@
         <p id="MSCT">
           <img width="80" src="/static/images/MCTS.png" border="0" alt="Microsoft Certified Techonoly Specialist" />
         </p>
-        
         <p>
           Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.
         </p>
